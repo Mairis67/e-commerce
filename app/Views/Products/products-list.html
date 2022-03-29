@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../style.css">
+    <title>Products List</title>
+</head>
+<body>
+
+<header>
+    <h3>Product List</h3>
+    <nav>
+        <a class="add-btn" href="/add"><button type="submit">Add</button></a>
+    </nav>
+</header>
+
+{% for product in products %}
+<ul>
+    <li>
+        Name: {{ product.name }}
+    </li>
+    <li>
+        Description: {{ product.description }}
+    </li>
+    <li>
+        Price: {{ product.price }} $
+    </li>
+    <li>
+        Available: {{ product.available }}
+    </li>
+</ul>
+<br>
+{% endfor %}
+</body>
+</html>
