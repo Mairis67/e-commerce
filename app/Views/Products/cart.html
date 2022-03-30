@@ -14,7 +14,7 @@
     <div class="card-body">
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-text">{{ product.description }}</p>
-        <p class="card-text"><b>Amount:</b> {{ amount }}</p>
+        <p class="card-text"><b>Quantity:</b> {{ quantity }}</p>
         <p class="card-text"><b>Total:</b> {{ total }}$</p>
         <form method="post" action="/products/{{ product.id }}/cart/confirmed">
             <button type="submit" class="btn btn-primary" name="submit">Confirm</button>

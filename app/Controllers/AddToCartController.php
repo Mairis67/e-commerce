@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\Products\AddToCart\PurchaseRequest;
 use App\Services\Products\AddToCart\PurchaseService;
 use App\Services\Products\AddToCart\AvailableService;
 use App\Services\Products\Show\ShowProductRequest;
@@ -25,18 +26,17 @@ class AddToCartController
     public function addToCart(array $vars): View
     {
         $productId = (int) $vars['id'];
-        $amount = (int) $_POST['amount'];
+        $quantity = (int) $_POST['quantity'];
 
         $this->availableService->execute($productId);
 
         $showProduct = $this->showProductService->execute(new ShowProductRequest($productId));
 
-        $total = $showProduct->getPrice() * $amount;
-
+        $total = $showProduct->getPrice() * $quantity;
 
         return new View('Products/cart', [
             'product' => $showProduct,
-            'amount' => $amount,
+            'quantity' => $quantity,
             'total' => $total
         ]);
     }
@@ -44,13 +44,13 @@ class AddToCartController
     public function confirmed(array $vars): View
     {
         $productId = (int) $vars['id'];
-        $amount = (int) $_POST['amount'];
+        $quantity = (int) $_POST['quantity'];
 
-        $availableAmount = $this->availableService->execute($productId);
+        $available = $this->availableService->execute($productId);
 
-        $availableAfterPurchase = $availableAmount - $amount;
+        $availableAfterPurchase = $available - $quantity;
 
-        $this->addToCartService->execute($productId, $availableAfterPurchase);
+        $this->addToCartService->execute(new PurchaseRequest($productId, $availableAfterPurchase));
 
         return new View('Products/confirmed');
     }

@@ -14,7 +14,7 @@ class Database
             $connectionParams = [
                 'dbname' => 'shop',
                 'user' => 'mairis',
-                'password' => '',
+                'password' => '!',
                 'host' => 'localhost',
                 'driver' => 'pdo_mysql'
             ];

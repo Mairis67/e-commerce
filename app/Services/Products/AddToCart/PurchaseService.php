@@ -13,8 +13,8 @@ class PurchaseService
         $this->productsRepository = $productsRepository;
     }
 
-    public function execute(int $productId, int $available)
+    public function execute(PurchaseRequest $request)
     {
-        $this->productsRepository->purchase($productId, $available);
+        $this->productsRepository->purchase($request->getProductId(), $request->getAvailable());
     }
 }
