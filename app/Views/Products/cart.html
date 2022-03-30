@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<header>
+    <h3>Shopping Cart</h3>
+    <nav>
+        <form action="/products" id="cancel">
+            <button class="btn btn-primary">Product List</button>
+        </form>
+    </nav>
+</header>
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><b>Amount:</b> {{ amount }}</p>
+        <p class="card-text"><b>Total:</b> {{ total }}$</p>
+        <form method="post" action="/products/{{ product.id }}/cart/confirmed">
+            <button type="submit" class="btn btn-primary" name="submit">Confirm</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

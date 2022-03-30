@@ -4,15 +4,15 @@ namespace App\Services\Products\Show;
 
 class ShowProductRequest
 {
-    private array $products;
+    private int $productId;
 
-    public function __construct(array $products)
+    public function __construct(int $productId)
     {
-        $this->products = $products;
+        $this->productId = $productId;
     }
 
-    public function getProducts(): array
+    public function getProductId(): int
     {
-        return $this->products;
+        return $this->productId;
     }
 }

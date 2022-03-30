@@ -2,7 +2,11 @@
 
 session_start();
 
-use App\Controllers\AddProductsController;
+use App\Controllers\AddToCartController;
+use App\Controllers\ProductsCartController;
+use App\Controllers\HomePageController;
+use App\Controllers\ShowProductController;
+use App\Controllers\StoreProductsController;
 use App\Controllers\ListProductsController;
 use App\Redirect;
 use App\Repositories\Products\MySqlProductsRepository;
@@ -23,10 +27,18 @@ $builder->addDefinitions([
 $container = $builder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', [ListProductsController::class, 'list']);
+    $r->addRoute('GET', '/', [HomePageController::class, 'index']);
 
-    $r->addRoute('GET', '/add', [AddProductsController::class, 'add']);
-    $r->addRoute('POST', '/', [AddProductsController::class, 'store']);
+    $r->addRoute('GET', '/products', [ListProductsController::class, 'list']);
+    $r->addRoute('GET', '/products/{id:\d+}', [ShowProductController::class, 'show']);
+
+
+    $r->addRoute('GET', '/products/add', [StoreProductsController::class, 'add']);
+    $r->addRoute('POST', '/products', [StoreProductsController::class, 'store']);
+
+    $r->addRoute('POST', '/products/{id:\d+}/cart', [AddToCartController::class, 'addToCart']);
+    $r->addRoute('POST', '/products/{id:\d+}/cart/confirmed', [AddToCartController::class, 'confirmed']);
+
 });
 
 // Fetch method and URI from somewhere

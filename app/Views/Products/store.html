@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<header>
+    <h3>Add Product</h3>
+    <nav>
+        <button class="btn btn-primary" type="submit" form="product-form">Save</button>
+        <form action="/products" id="cancel">
+            <button class="btn btn-primary">Product List</button>
+        </form>
+    </nav>
+</header>
+
+<form action="/products" method="post" id="product-form">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="name">Name</span>
+        <input type="text" name="name" class="form-control" placeholder="Name" aria-label="name">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="description">Description</span>
+        <input type="text" name="description" class="form-control" placeholder="Description" aria-label="description">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="available">Available</span>
+        <input type="text" name="available" class="form-control" placeholder="Available" aria-label="available">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="price">Price</span>
+        <input type="text" name="price" class="form-control" placeholder="price" aria-label="price">
+    </div>
+</form>
+
+{% endblock %}

@@ -1,38 +1,30 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../../style.css">
-    <title>Products List</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% block content %}
 
 <header>
     <h3>Product List</h3>
     <nav>
-        <a class="add-btn" href="/add"><button type="submit">Add</button></a>
+        <a class="btn btn-primary" href="/products/add">Add</a>
+        <a class="btn btn-primary" href="/">Home</a>
     </nav>
 </header>
 
 {% for product in products %}
-<ul>
-    <li>
-        Name: {{ product.name }}
-    </li>
-    <li>
-        Description: {{ product.description }}
-    </li>
-    <li>
-        Price: {{ product.price }} $
-    </li>
-    <li>
-        Available: {{ product.available }}
-    </li>
-</ul>
-<br>
+
+<div class="card text-center">
+    <div class="card-header">
+        Protective
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><b>Available:</b> {{ product.available }}</p>
+        <p class="card-text"><b>Price:</b> {{ product.price }}</p>
+        <a href="/products/{{ product.id }}" class="btn btn-primary">{{ product.name }}</a>
+    </div>
+</div>
+
+
 {% endfor %}
-</body>
-</html>
+
+{% endblock %}

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services\Products\Show;
+namespace App\Services\Products\AddToCart;
 
-use App\Models\Product;
 use App\Repositories\Products\ProductsRepository;
 
-class ShowProductService
+class AvailableService
 {
     private ProductsRepository $productsRepository;
 
@@ -14,10 +13,8 @@ class ShowProductService
         $this->productsRepository = $productsRepository;
     }
 
-    public function execute(ShowProductRequest $request): Product
+    public function execute(int $productId): int
     {
-        $productId = $request->getProductId();
-
-        return $this->productsRepository->show($productId);
+        return $this->productsRepository->getAvailable($productId);
     }
 }

@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class MySqlProductsRepository implements ProductsRepository
 {
-    public function show(): array
+    public function list(): array
     {
         $productsQuery = Database::connection()
             ->createQueryBuilder()
@@ -22,12 +22,32 @@ class MySqlProductsRepository implements ProductsRepository
             $products[] = new Product(
                 $productsData['name'],
                 $productsData['description'],
-                $productsData['price'],
                 $productsData['available'],
+                $productsData['price'],
                 $productsData['id']
             );
         }
         return $products;
+    }
+
+    public function show(int $productId): Product
+    {
+        $productQuery = Database::connection()
+            ->createQueryBuilder()
+            ->select('*')
+            ->from('products')
+            ->where('id = ?')
+            ->setParameter(0, $productId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return new Product(
+          $productQuery['name'],
+          $productQuery['description'],
+          $productQuery['available'],
+          $productQuery['price'],
+          $productQuery['id']
+        );
     }
 
     public function store(Product $product): void
@@ -36,9 +56,31 @@ class MySqlProductsRepository implements ProductsRepository
             ->insert('products', [
                 'name' => $product->getName(),
                 'description' => $product->getDescription(),
-                'price' => $product->getPrice(),
                 'available' => $product->getAvailable(),
+                'price' => $product->getPrice(),
                 'id' => $product->getId()
             ]);
+    }
+
+    public function getAvailable(int $productId): int
+    {
+        $productQuery = Database::connection()
+            ->createQueryBuilder()
+            ->select('available')
+            ->from('products')
+            ->where('id = ?')
+            ->setParameter(0, $productId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return (int) $productQuery["available"];
+    }
+
+    public function purchase(int $productId, int $available): void
+    {
+        Database::connection()
+            ->update('products', [
+                'available' => $available
+            ], ['id' => $productId]);
     }
 }

@@ -20,7 +20,7 @@ class StoreProductService
             $request->getName(),
             $request->getDescription(),
             $request->getPrice(),
-            $request->getAvailable()
+            $request->getAvailable(),
         );
 
         $this->productsRepository->store($product);

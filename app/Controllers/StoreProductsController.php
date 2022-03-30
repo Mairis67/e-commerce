@@ -8,7 +8,7 @@ use App\Services\Products\Store\StoreProductRequest;
 use App\Services\Products\Store\StoreProductService;
 use App\View;
 
-class AddProductsController
+class StoreProductsController
 {
     private StoreProductService $storeProductService;
 
@@ -19,7 +19,7 @@ class AddProductsController
 
     public function add(): View
     {
-        return new View('Products/add');
+        return new View('Products/store');
     }
 
     public function store(): Redirect
@@ -31,6 +31,6 @@ class AddProductsController
                 $_POST['available'],)
         );
 
-        return new Redirect('/');
+        return new Redirect('/products');
     }
 }

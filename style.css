@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eee;
+}
+
+header {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 3%;
+}
+
+.card-body {
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+.heading {
+    text-align: center;
+    padding-top: 600px;
+}
+
+#DVD, #Book, #Furniture {
+    display: none;
+}
+
+#cancel {
+    display: inline;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    padding: 28px;
+    height: 70px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#purchased {
+    text-align: center;
+    padding-top: 200px;
+}

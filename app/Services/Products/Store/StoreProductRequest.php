@@ -9,12 +9,12 @@ class StoreProductRequest
     private int $price;
     private int $available;
 
-    public function __construct(string $name, string $description, int $price, int $available)
+    public function __construct(string $name, string $description,int $available, int $price)
     {
         $this->name = $name;
         $this->description = $description;
-        $this->price = $price;
         $this->available = $available;
+        $this->price = $price;
     }
 
     public function getName(): string
@@ -27,13 +27,13 @@ class StoreProductRequest
         return $this->description;
     }
 
-    public function getPrice(): int
-    {
-        return $this->price;
-    }
-
     public function getAvailable(): int
     {
         return $this->available;
+    }
+
+    public function getPrice(): int
+    {
+        return $this->price;
     }
 }
